@@ -175,7 +175,8 @@ MESSAGE_TAGS = {
 
 LOGIN_URL = '/accounts/login/'
 SOCIALACCOUNT_LOGIN_ON_GET = True  # Automatically log in users after social account authentication
-LOGIN_REDIRECT_URL = '/home/'  # Redirect to home after login
+# LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home/'  # Redirect to home after login
+LOGIN_REDIRECT_URL = '/'  # Redirect to home after login
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
