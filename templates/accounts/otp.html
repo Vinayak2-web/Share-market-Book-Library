@@ -1,0 +1,68 @@
+{% extends "dash/homeview.html" %}
+
+{% block stock %}
+
+<h2>Enter OTP</h2>
+
+<form action="" method="post" id="otp-form">
+    {% csrf_token %}
+
+    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <input type="text" name="otp1" id="otp1" maxlength="1" required oninput="moveNext(this, 'otp2')">
+        <input type="text" name="otp2" id="otp2" maxlength="1" required oninput="moveNext(this, 'otp3')">
+        <input type="text" name="otp3" id="otp3" maxlength="1" required oninput="moveNext(this, 'otp4')">
+        <input type="text" name="otp4" id="otp4" maxlength="1" required>
+    </div>
+
+    <!-- Hidden input to combine OTP before submit -->
+    <input type="hidden" name="otp" id="otp">
+    <input type="submit" value="Verify OTP">
+
+    <center>
+        <p>OTP expires in: <span id="timer" style="color: red;">10:00</span></p>
+    </center>
+</form>
+
+<script>
+    // Auto-move to next input
+    function moveNext(current, nextId) {
+        if (current.value.length === 1) {
+            document.getElementById(nextId).focus();
+        }
+    }
+
+    // Combine OTP values before submit
+    document.getElementById('otp-form').addEventListener('submit', function (e) {
+        const otp = 
+            document.getElementById('otp1').value +
+            document.getElementById('otp2').value +
+            document.getElementById('otp3').value +
+            document.getElementById('otp4').value;
+        document.getElementById('otp').value = otp;
+    });
+
+    // Countdown Timer
+    let totalTime = 600;  // 10 minutes
+    const timerDisplay = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+        let minutes = Math.floor(totalTime / 60);
+        let seconds = totalTime % 60;
+
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        timerDisplay.textContent = `${minutes}:${seconds}`;
+        totalTime--;
+
+        if (totalTime < 0) {
+            clearInterval(countdown);
+            timerDisplay.textContent = "OTP expired";
+            ['otp1', 'otp2', 'otp3', 'otp4'].forEach(id => {
+                document.getElementById(id).disabled = true;
+            });
+        }
+    }, 1000);
+</script>
+
+{% endblock stock %}

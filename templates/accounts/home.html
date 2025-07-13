@@ -1,0 +1,7 @@
+{% extends "dash/homeview.html" %}
+{% block title %}Home{% endblock title %}
+{% block stock %}
+
+<h1>Welcome  {{user.username}}</h1>
+<a href="{% url "logout" %}"><button>Log out</button></a>
+{% endblock %}

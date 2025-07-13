@@ -1,0 +1,78 @@
+/* Base Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Section Layout */
+section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+/* Image Styling */
+.section-img {
+  width: 45%;
+  max-width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* Content Block */
+section > div.content {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* Tablet View (≤ 1024px) */
+@media (max-width: 1024px) {
+  .section-img {
+    width: 50%;
+  }
+
+  section > div.content {
+    flex: 1;
+  }
+}
+
+/* Mobile View (≤ 768px) */
+@media (max-width: 768px) {
+  section {
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .section-img {
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  section > div.content {
+    width: 100%;
+  }
+}
+
+/* Small Devices (≤ 480px) */
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .section-img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  section {
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+}

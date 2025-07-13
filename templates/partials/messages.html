@@ -1,0 +1,28 @@
+{% comment %} Popup messages  {% endcomment %}
+  <html>
+    <body>
+      
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  {% if messages %}
+  <script>
+    {% for message in messages %}
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
+        title: '{{ message }}',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    });
+    {% endfor %}
+  </script>
+  {% endif %}
+  </body>
+</html>
+  {% block content %}
+  {% endblock content %}

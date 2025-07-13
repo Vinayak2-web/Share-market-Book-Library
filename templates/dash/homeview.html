@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- ✅ Navbar -->
+<header style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); padding: 20px; color: white;">
+  <div style="max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+    <h1 style="font-family: 'Georgia', serif; font-size: 28px; letter-spacing: 1px; margin: 0;">
+      💹 StockInsight
+    </h1>
+    <nav style="margin-top: 10px;">
+      <a href="{% url 'view' %}" style="color: white; margin: 0 12px;text-decoration:none;">Home</a>
+      {% comment %} <a href="#" style="color: white; margin: 0 12px;text-decoration:none;">Market</a> {% endcomment %}
+      <a href="{% url "homeview" %}" style="color: white; margin: 0 12px;text-decoration:none;">Book</a>
+
+      {% if user.is_authenticated %}
+        <span style="margin: 0 12px;">Welcome, {{ user.username }}</span>
+        <a href="{% url 'logout' %}" style="color: white; margin: 0 12px;text-decoration:none;">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" style="color: white; margin: 0 12px;text-decoration:none;">Login</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+{% block stock %}
+
+<!-- CTA -->
+  <h1 style='margin-top:10px;'>📚 Stock Market Book Collection</h1>
+
+<div style="text-align: center; background: #e3f2fd; padding: 20px 10px; color: #0d47a1; font-size: 18px; font-weight: 600;margin-bottom:20px;">
+  📈 Ready to grow your knowledge? Dive into the market like a pro! 🕯️📊💼 #BullishOnBooks
+</div>
+
+{% endblock stock %}
+<link rel="stylesheet" href="{% static 'css/accounts/dash/homeview.css' %}">
+
+{% block home %}
+
+{% endblock home %}
+
+<!-- Book Cards -->
+<div class="container">
+  <div class="book-grid">
+    {% for book in Books %}
+      <div class="book-card">
+        {% if book.slug %}
+          <a style='text-decoration:none;' href="{% url 'details' book.slug %}">
+            {% if book.book_cover %}
+              <img src="{{ book.book_cover.url }}" alt="{{ book.title }}">
+            {% else %}
+              <div class="no-cover">No Cover</div>
+            {% endif %}
+            <h2>{{ book.title }}</h2>
+          </a>
+        {% else %}
+          <div>
+            {% if book.book_cover %}
+              <img src="{{ book.book_cover.url }}" alt="{{ book.title }}">
+            {% else %}
+              <div class="no-cover">No Cover</div>
+            {% endif %}
+            <h2>{{ book.title }}</h2>
+            <span class="details-disabled">Details Unavailable</span>
+          </div>
+        {% endif %}
+        <p class="author">{{ book.author }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Footer -->
+<footer style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); color: white; padding: 30px 20px; margin-top: 50px;">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+    <div><p style="font-size: 14px; color: #ccc;">Educate. Analyze. Invest Wisely!</p></div>
+    <div>
+      <a href="{% url "homeview" %}" style="color: #ccc; margin: 0 10px;text-decoration:none;">Home</a>
+      <a href="#" style="color: #ccc; margin: 0 10px;text-decoration:none;">Terms</a>
+      <a href="#" style="color: #ccc; margin: 0 10px;text-decoration:none;">Privacy</a>
+    </div>
+    <div>
+      <a href="#" style="color: #ccc; margin: 0 8px;text-decoration:none;">Telegram</a>
+      <a href="#" style="color: #ccc; margin: 0 8px;text-decoration:none;">Twitter</a>
+      <a href="#" style="color: #ccc; margin: 0 8px;text-decoration:none;">YouTube</a>
+    </div>
+  </div>
+  <hr style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 20px 0;">
+  <p style="text-align: center; font-size: 13px; color: #bbb;">© {{ year }} StockInsight. Empowering Traders One Book at a Time.</p>
+</footer>
+
+{% endblock content %}

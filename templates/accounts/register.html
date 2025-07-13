@@ -1,0 +1,14 @@
+{% extends "dash/homeview.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block stock %}
+
+<form method="post">
+    <h2>Create A new Account</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="#"><input type="submit" value="Register"></a>
+    <p style="text-align: center; margin-top: 20px;">Already have an account? <a href="{% url "login" %}">Login</a></p>
+</form>
+{% endblock %}

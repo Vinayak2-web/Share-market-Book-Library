@@ -1,0 +1,50 @@
+  /* Outer container padding */
+.container {
+  padding: 50px;
+
+
+}
+
+/* Book detail card styling */
+.book-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #d0f0ff 30%, white 70%);
+
+
+}
+
+/* Center the download button */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Remove underline from link */
+.pdf-button {
+  text-decoration: none;
+}
+
+/* Button styling */
+.pdf-button button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+.pdf-button button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+
